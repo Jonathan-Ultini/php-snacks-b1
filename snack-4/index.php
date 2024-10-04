@@ -236,6 +236,8 @@ $classi = [
     ],
   ],
 ];
+
+
 ?>
 
 <!DOCTYPE html>
@@ -258,16 +260,19 @@ $classi = [
 
     // Ciclo sugli studenti di ogni classe
     foreach ($studenti as $studente) {
-      echo "<p><strong>Nome:</strong> {$studente['nome']}</p>";
-      echo "<p><strong>Cognome:</strong> {$studente['cognome']}</p>";
-      echo "<p><strong>Anni:</strong> {$studente['anni']}</p>";
-      echo "<p><strong>Voto Medio:</strong> {$studente['voto_medio']}</p>";
-      echo "<p><strong>Linguaggio Preferito:</strong> {$studente['linguaggio_preferito']}</p>";
-      // echo "<img src='{$studente['immagine']}' alt='Immagine Studente' style='width: 200px; height: 200px;'><br><br>";
-      echo "<br><br>";
+      if ($studente['voto_medio'] >= 6) { // Verifica se il voto è sufficiente
+        echo "<p><strong>Nome:</strong> {$studente['nome']}</p>";
+        echo "<p><strong>Cognome:</strong> {$studente['cognome']}</p>";
+        echo "<p><strong>Anni:</strong> {$studente['anni']}</p>";
+        echo "<p><strong>Voto Medio:</strong> {$studente['voto_medio']}</p>";
+        echo "<p><strong>Linguaggio Preferito:</strong> {$studente['linguaggio_preferito']}</p>";
+        // echo "<img src='{$studente['immagine']}' alt='Immagine Studente' style='width: 200px; height: 200px;'><br><br>";
+        echo "<br><br>";
+      }
     }
   }
   ?>
+
 
 </body>
 
