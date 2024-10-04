@@ -237,7 +237,7 @@ $classi = [
   ],
 ];
 $votoMassimo = isset($_GET['voto_medio']) ? (float) $_GET['voto_medio'] : null;
-
+$linguaggioPreferito = isset($_GET['linguaggio']) ? trim($_GET['linguaggio']) : null;
 ?>
 
 <!DOCTYPE html>
@@ -253,12 +253,16 @@ $votoMassimo = isset($_GET['voto_medio']) ? (float) $_GET['voto_medio'] : null;
   <div class="container mt-5">
     <h1 class="text-center text-primary mb-5">Elenco Classi e Studenti</h1>
 
-    <!-- Form per inserire il voto medio massimo -->
+    <!-- Form per inserire il voto medio massimo e il linguaggio preferito -->
     <form method="GET" action="">
       <div class="form-group">
         <label for="voto_medio">Inserisci voto medio massimo:</label>
         <input type="number" class="form-control" id="voto_medio" name="voto_medio" step="0.1"
           value="<?= $votoMassimo ?>" required>
+      </div>
+      <div class="form-group">
+        <label for="linguaggio">Inserisci linguaggio preferito:</label>
+        <input type="text" class="form-control" id="linguaggio" name="linguaggio" value="<?= $linguaggioPreferito ?>">
       </div>
       <button type="submit" class="btn btn-primary">Filtra</button>
     </form>
@@ -266,31 +270,32 @@ $votoMassimo = isset($_GET['voto_medio']) ? (float) $_GET['voto_medio'] : null;
     <hr>
 
     <?php if ($votoMassimo !== null) { ?>
-    <h3 class="text-info">Studenti con voto medio inferiore a <?= $votoMassimo ?>:</h3>
+      <h3 class="text-info">Studenti con voto medio inferiore a <?= $votoMassimo ?>:</h3>
     <?php } ?>
 
     <!-- Ciclo dinamico sulle classi -->
     <?php foreach ($classi as $classe => $studenti) { ?>
-    <div class="mb-4">
-      <h2 class="text-success"><?= $classe ?></h2>
+      <div class="mb-4">
+        <h2 class="text-success"><?= $classe ?></h2>
 
-      <!-- Ciclo sugli studenti di ogni classe -->
-      <?php foreach ($studenti as $studente) { ?>
-      <?php if ($votoMassimo === null || $studente['voto_medio'] < $votoMassimo) { ?>
-      <div class="card mb-3">
-        <div class="card-body">
-          <h3 class="card-title"><?= $studente['nome'] . " " . $studente['cognome'] ?></h3>
-          <p class="card-text">
-            <strong>Anni:</strong> <?= $studente['anni'] ?><br>
-            <strong>Voto Medio:</strong> <?= $studente['voto_medio'] ?><br>
-            <strong>Linguaggio Preferito:</strong> <?= $studente['linguaggio_preferito'] ?>
-          </p>
-          <!-- <img src=" $studente['immagine'] " alt="Immagine Studente" class="img-fluid" style="width: 200px; height: 200px;"> -->
-        </div>
+        <!-- Ciclo sugli studenti di ogni classe -->
+        <?php foreach ($studenti as $studente) { ?>
+          <?php $linguaggioMatch = !$linguaggioPreferito || stripos($studente['linguaggio_preferito'], $linguaggioPreferito) !== false;
+          if (($votoMassimo === null || $studente['voto_medio'] < $votoMassimo) && $linguaggioMatch) { ?>
+            <div class="card mb-3">
+              <div class="card-body">
+                <h3 class="card-title"><?= $studente['nome'] . " " . $studente['cognome'] ?></h3>
+                <p class="card-text">
+                  <strong>Anni:</strong> <?= $studente['anni'] ?><br>
+                  <strong>Voto Medio:</strong> <?= $studente['voto_medio'] ?><br>
+                  <strong>Linguaggio Preferito:</strong> <?= $studente['linguaggio_preferito'] ?>
+                </p>
+                <!-- <img src=" $studente['immagine'] " alt="Immagine Studente" class="img-fluid" style="width: 200px; height: 200px;"> -->
+              </div>
+            </div>
+          <?php } ?>
+        <?php } ?>
       </div>
-      <?php } ?>
-      <?php } ?>
-    </div>
     <?php } ?>
 
   </div>
