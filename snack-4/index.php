@@ -8,7 +8,7 @@ $classi = [
       "anni" => 23,
       "voto_medio" => 8.5,
       "linguaggio_preferito" => "PHP",
-      "immagine" => "https://source.unsplash.com/random/200x200?person",
+      "immagine" => "https://source.unsplash.com/random/200x200?face",
     ],
     [
       "id" => 2,
@@ -239,7 +239,7 @@ $classi = [
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
   <meta charset="UTF-8">
@@ -249,6 +249,37 @@ $classi = [
 
 <body>
 
+  <h1>Elenco Classi e Studenti</h1>
+
+  <?php
+  // Ciclo dinamico sulle classi
+  foreach ($classi as $classe => $studenti) {
+    echo "<h2>$classe</h2>"; // Nome della classe
+
+    // Ciclo sugli studenti di ogni classe
+    foreach ($studenti as $studente) {
+      echo "<p><strong>Nome:</strong> {$studente['nome']}</p>";
+      echo "<p><strong>Cognome:</strong> {$studente['cognome']}</p>";
+      echo "<p><strong>Anni:</strong> {$studente['anni']}</p>";
+      echo "<p><strong>Voto Medio:</strong> {$studente['voto_medio']}</p>";
+      echo "<p><strong>Linguaggio Preferito:</strong> {$studente['linguaggio_preferito']}</p>";
+      // echo "<img src='{$studente['immagine']}' alt='Immagine Studente' style='width: 200px; height: 200px;'><br><br>";
+      echo "<br><br>";
+    }
+  }
+  ?>
+
 </body>
+
+
+<!-- [
+"id" => 65,
+"nome" => "Claudio",
+"cognome" => "Lanza",
+"anni" => 30,
+"voto_medio" => 6.7,
+"linguaggio_preferito" => "PHP",
+"immagine" => "https://source.unsplash.com/random/200x200?person",
+], -->
 
 </html>
