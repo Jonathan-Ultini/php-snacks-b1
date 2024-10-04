@@ -8,7 +8,7 @@ $classi = [
       "anni" => 23,
       "voto_medio" => 8.5,
       "linguaggio_preferito" => "PHP",
-      "immagine" => "https://source.unsplash.com/random/200x200?face",
+      "immagine" => "https://source.unsplash.com/random/200x200?person",
     ],
     [
       "id" => 2,
