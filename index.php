@@ -32,6 +32,10 @@ $db = [
     [
       'name' => 'Fabio',
       'lastname' => 'Forghieri'
+    ],
+    [
+      'name' => 'Narcone',
+      'lastname' => 'Weed'
     ]
   ],
   'pm' => [
@@ -42,6 +46,10 @@ $db = [
     [
       'name' => 'Federico',
       'lastname' => 'Pellegrini'
+    ],
+    [
+      'name' => 'Arcesco',
+      'lastname' => 'Poppapedretti'
     ]
   ]
 ];
