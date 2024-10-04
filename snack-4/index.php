@@ -236,45 +236,77 @@ $classi = [
     ],
   ],
 ];
-
+$votoMassimo = isset($_GET['voto_medio']) ? (float) $_GET['voto_medio'] : null;
 
 ?>
 
 <!DOCTYPE html>
 <html lang="it">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Snack-4</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snack-4</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
 
-  <h1>Elenco Classi e Studenti</h1>
+  <div class="container mt-5">
+    <h1 class="text-center text-primary mb-5">Elenco Classi e Studenti</h1>
 
-  <?php
-  // Ciclo dinamico sulle classi
-  foreach ($classi as $classe => $studenti) {
-    echo "<h2>$classe</h2>"; // Nome della classe
+    <!-- Form per inserire il voto medio massimo -->
+    <form method="GET" action="">
+      <div class="form-group">
+        <label for="voto_medio">Inserisci voto medio massimo:</label>
+        <input type="number" class="form-control" id="voto_medio" name="voto_medio" step="0.1"
+          value="<?= $votoMassimo ?>" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Filtra</button>
+    </form>
 
-    // Ciclo sugli studenti di ogni classe
-    foreach ($studenti as $studente) {
-      if ($studente['voto_medio'] >= 6) { // Verifica se il voto è sufficiente
-        echo "<p><strong>Nome:</strong> {$studente['nome']}</p>";
-        echo "<p><strong>Cognome:</strong> {$studente['cognome']}</p>";
-        echo "<p><strong>Anni:</strong> {$studente['anni']}</p>";
-        echo "<p><strong>Voto Medio:</strong> {$studente['voto_medio']}</p>";
-        echo "<p><strong>Linguaggio Preferito:</strong> {$studente['linguaggio_preferito']}</p>";
-        // echo "<img src='{$studente['immagine']}' alt='Immagine Studente' style='width: 200px; height: 200px;'><br><br>";
-        echo "<br><br>";
-      }
-    }
-  }
-  ?>
+    <hr>
 
+    <?php if ($votoMassimo !== null) { ?>
+    <h3 class="text-info">Studenti con voto medio inferiore a <?= $votoMassimo ?>:</h3>
+    <?php } ?>
+
+    <!-- Ciclo dinamico sulle classi -->
+    <?php foreach ($classi as $classe => $studenti) { ?>
+    <div class="mb-4">
+      <h2 class="text-success"><?= $classe ?></h2>
+
+      <!-- Ciclo sugli studenti di ogni classe -->
+      <?php foreach ($studenti as $studente) { ?>
+      <?php if ($votoMassimo === null || $studente['voto_medio'] < $votoMassimo) { ?>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3 class="card-title"><?= $studente['nome'] . " " . $studente['cognome'] ?></h3>
+          <p class="card-text">
+            <strong>Anni:</strong> <?= $studente['anni'] ?><br>
+            <strong>Voto Medio:</strong> <?= $studente['voto_medio'] ?><br>
+            <strong>Linguaggio Preferito:</strong> <?= $studente['linguaggio_preferito'] ?>
+          </p>
+          <!-- <img src=" $studente['immagine'] " alt="Immagine Studente" class="img-fluid" style="width: 200px; height: 200px;"> -->
+        </div>
+      </div>
+      <?php } ?>
+      <?php } ?>
+    </div>
+    <?php } ?>
+
+  </div>
+
+
+  <!-- Commentato il filtro originale del punto 4B:
+       if ($studente['voto_medio'] >= 6) {
+          echo "Mostra studente";
+       } -->
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
+
 
 
 <!-- [
