@@ -39,26 +39,26 @@ $posts = [
 <body>
 
   <div class="container mt-5">
-    <h1>Snack 1</h1>
+    <h1 class="text-danger">Snack 1</h1>
     <h1 class="text-center mb-5">Elenco dei Post</h1>
 
     <?php foreach ($posts as $date => $postList) { ?>
-      <div class="card mb-4">
-        <div class="card-header bg-primary text-white">
-          Data: <?= $date ?>
-        </div>
-        <div class="card-body">
-          <?php foreach ($postList as $post) { ?>
-            <h5 class="card-title"><?= $post['title'] ?></h5>
-            <h6 class="card-subtitle mb-2 text-muted">Autore: <?= $post['author'] ?></h6>
-            <p class="card-text"><?= $post['text'] ?></p>
-            <hr>
-          <?php } ?>
-        </div>
+    <div class="card mb-4">
+      <div class="card-header bg-primary text-white">
+        Data: <?= $date ?>
       </div>
+      <div class="card-body">
+        <?php foreach ($postList as $post) { ?>
+        <h5 class="card-title"><?= $post['title'] ?></h5>
+        <h6 class="card-subtitle mb-2 text-muted">Autore: <?= $post['author'] ?></h6>
+        <p class="card-text"><?= $post['text'] ?></p>
+        <hr>
+        <?php } ?>
+      </div>
+    </div>
     <?php } ?>
 
-    <h1>Snack 2</h1>
+    <h1 class="text-danger">Snack 2</h1>
     <h1 class="text-center mb-5">Verifica Dati</h1>
 
     <form action="" method="GET">
@@ -76,6 +76,23 @@ $posts = [
       </div>
       <button type="submit" class="btn btn-primary">Invia</button>
     </form>
+
+    <div class="mt-5">
+      <?php
+      if (isset($_GET['name'], $_GET['mail'], $_GET['age'])) {
+        $name = $_GET['name'];
+        $mail = $_GET['mail'];
+        $age = $_GET['age'];
+
+        // Verifica del nome, controllo (@ .), verifica età
+        if (strlen($name) > 3 && strpos($mail, '@') && strpos($mail, '.') && is_numeric($age)) {
+          echo '<p class="text-success">Accesso riuscito</p>';
+        } else {
+          echo '<p class="text-danger">Accesso negato</p>';
+        }
+      }
+      ?>
+    </div>
 
   </div>
 
