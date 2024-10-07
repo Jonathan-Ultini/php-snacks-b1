@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . "functions.php"  ?>
+<?php require_once __DIR__ . "/functions.php"  ?>
 
 
 <!DOCTYPE html>
@@ -20,6 +20,17 @@
       </div>
       <button type="submit" class="btn btn-primary">Controlla Palindromo</button>
     </form>
+
+    <?php
+    if (isset($_GET['word'])) {
+      $input = $_GET['word'];
+      if (isPalindrome($input)) {
+        echo "<p class='text-success text-center mt-3'>La parola/frase $input è un palindromo!</p>";
+      } else {
+        echo "<p class='text-danger text-center mt-3'>La parola/frase $input non è un palindromo.</p>";
+      }
+    }
+    ?>
 
   </div>
 
